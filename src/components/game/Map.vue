@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useMapStore, MapTile } from "../store/map";
-import wallImage from "../assets/wall.png";
-import floorImage from "../assets/floor.png";
+import { useMapStore, MapTile } from "../../store/map";
+import wallImage from "../../assets/wall.png";
+import floorImage from "../../assets/floor.png";
 const { map } = useMapStore();
 </script>
 

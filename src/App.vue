@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Map from "./components/Map.vue";
+import Game from "./components/game/Game.vue";
 </script>
 
 <template>
-  <Map />
+  <Game />
 </template>

@@ -1,21 +1,33 @@
-import { beforeEach, expect, it } from "vitest";
-import { useMove } from "../player";
 import { createPinia, setActivePinia } from "pinia";
+import { beforeEach, describe, expect, it } from "vitest";
+import { useMapStore } from "../../../store/map";
 import { usePlayerStore } from "../../../store/player";
+import { useMove } from "../player";
 
 beforeEach(() => {
   setActivePinia(createPinia());
 });
 
-it("should move to left when press ArrowLeft", () => {
-  const { player } = usePlayerStore();
+describe("player", () => {
+  it("should move to left when press ArrowLeft", () => {
+    const { player } = usePlayerStore();
+    const { setupMap } = useMapStore();
 
-  player.x = 1;
-  player.y = 1;
+    setupMap([
+      [1, 1, 1, 1, 1],
+      [1, 2, 2, 2, 1],
+      [1, 2, 2, 2, 1],
+      [1, 2, 2, 2, 1],
+      [1, 1, 1, 1, 1],
+    ]);
 
-  useMove();
+    player.x = 1;
+    player.y = 1;
 
-  window.dispatchEvent(new KeyboardEvent("keyup", { code: "ArrowLeft" }));
+    useMove();
 
-  expect(player.x).toBe(0);
+    window.dispatchEvent(new KeyboardEvent("keyup", { code: "ArrowLeft" }));
+
+    expect(player.x).toBe(1);
+  });
 });

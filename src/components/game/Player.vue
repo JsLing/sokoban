@@ -2,9 +2,8 @@
 import keeperImg from "../../assets/keeper.png";
 import { useMove, usePosition } from "./player";
 
-useMove();
-
 const { position } = usePosition();
+useMove();
 </script>
 <template>
   <div>

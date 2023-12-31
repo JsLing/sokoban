@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import cargoImage from "../../assets/cargo.png";
+import cargoOnTargetImage from "../../assets/cargo_on_target.png";
 import { usePosition } from "../../composables/usePosition";
+import { type Cargo } from "../../store/cargo";
 
 interface Props {
-  x: number;
-  y: number;
+  cargo: Cargo;
 }
 
 const props = defineProps<Props>();
-
-const { position } = usePosition(props);
+const { position } = usePosition(props.cargo);
 </script>
 
 <template>
-  <img :src="cargoImage" class="absolute" :style="position" />
+  <img
+    class="absolute"
+    :src="cargo.onTarget ? cargoOnTargetImage : cargoImage"
+    :style="position"
+  />
 </template>

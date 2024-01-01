@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { levelGameData } from "../../game/gameData";
 import { useCargoStore } from "../../store/cargo";
 import { useGameStore } from "../../store/game";
 import { useTarget } from "../../store/target";
@@ -7,14 +8,11 @@ import Map from "./Map.vue";
 import Player from "./Player.vue";
 import Targer from "./Targer.vue";
 
-const { game } = useGameStore();
-const { cargos, addCargo, createCargo } = useCargoStore();
-addCargo(createCargo({ x: 2, y: 2 }));
-addCargo(createCargo({ x: 3, y: 3 }));
+const { game, setupGame } = useGameStore();
+const { cargos } = useCargoStore();
+const { targets } = useTarget();
 
-const { targets, addTarget, createTarget } = useTarget();
-addTarget(createTarget({ x: 4, y: 3 }));
-addTarget(createTarget({ x: 4, y: 2 }));
+setupGame(levelGameData);
 </script>
 
 <template>

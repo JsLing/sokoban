@@ -1,4 +1,5 @@
 import { computed, onMounted, onUnmounted } from "vue";
+import { useGameStore } from "../../store/game";
 import { usePlayerStore } from "../../store/player";
 
 export function useMove() {
@@ -10,6 +11,7 @@ export function useMove() {
   } = usePlayerStore();
 
   function handleKeyup(e: KeyboardEvent) {
+    const { detectionGameCompletd } = useGameStore();
     switch (e.code) {
       case "ArrowLeft":
         movePlayerToLeft();
@@ -26,6 +28,8 @@ export function useMove() {
       default:
         break;
     }
+
+    detectionGameCompletd();
   }
 
   onMounted(() => {

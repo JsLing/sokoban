@@ -52,4 +52,14 @@ describe("cargo", () => {
 
     expect(cargo.onTarget).toBe(false);
   });
+
+  it("should clean all cargos", () => {
+    const { cargos, addCargo, createCargo, cleanAllCargo } = useCargoStore();
+    addCargo(createCargo({ x: 2, y: 1 }));
+    addCargo(createCargo({ x: 2, y: 2 }));
+
+    cleanAllCargo();
+
+    expect(cargos.length).toBe(0);
+  });
 });

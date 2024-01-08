@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { gameData } from "../../game/gameData";
-import { useCargoStore } from "../../store/cargo";
-import { useGameStore } from "../../store/game";
-import { useTarget } from "../../store/target";
-import Cargo from "./Cargo.vue";
-import Map from "./Map.vue";
-import Player from "./Player.vue";
-import Targer from "./Targer.vue";
+import Cargo from "@/components/game/Cargo.vue";
+import Map from "@/components/game/Map.vue";
+import Player from "@/components/game/Player.vue";
+import Targer from "@/components/game/Targer.vue";
+import { gameData } from "@/game/gameData";
+import { useCargoStore } from "@/store/cargo";
+import { useGameStore } from "@/store/game";
+import { useTarget } from "@/store/target";
 
 const { game, setupGame, toNextLevel } = useGameStore();
 const { cargos } = useCargoStore();

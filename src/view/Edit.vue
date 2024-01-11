@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import EditElementView from "@/components/edit/EditElementView.vue";
 import MapEdit from "@/components/edit/MapEdit.vue";
 </script>
 
@@ -10,6 +11,8 @@ import MapEdit from "@/components/edit/MapEdit.vue";
       </div>
       <div>数据展示区k</div>
     </div>
-    <div>原素展示区</div>
+    <div>
+      <EditElementView />
+    </div>
   </div>
 </template>

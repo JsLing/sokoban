@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import floorImage from "@/assets/floor.png";
 import wallImage from "@/assets/wall.png";
+import { useEditElementStore } from "@/store/edit/editElement";
 import { useMapEditStore } from "@/store/edit/mapEdit";
 import { MapTile } from "@/store/map";
 
@@ -13,7 +14,8 @@ const prop = defineProps<Prop>();
 const { map } = useMapEditStore();
 
 function handleClick() {
-  map[prop.y][prop.x] = MapTile.WALL;
+  const { getCurrentEditElement } = useEditElementStore();
+  getCurrentEditElement().execute(prop);
 }
 </script>
 <template>

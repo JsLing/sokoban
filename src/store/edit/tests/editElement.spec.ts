@@ -11,6 +11,8 @@ import { useMapEditStore } from "../mapEdit";
 describe("editElement", () => {
   beforeEach(() => {
     setActivePinia(createPinia());
+    const { initMap } = useMapEditStore();
+    initMap();
   });
 
   it("should change to wall when current selected element is wall", () => {

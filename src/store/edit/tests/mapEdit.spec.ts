@@ -71,4 +71,59 @@ describe("mapEdit", () => {
       `);
     });
   });
+
+  describe("col", () => {
+    it("shouid add a new line when increase", () => {
+      const { map, initMap, setCol, updateMapCol } = useMapEditStore();
+
+      initMap(2, 2);
+
+      setCol(4);
+
+      updateMapCol();
+
+      expect(map).toMatchInlineSnapshot(`
+        [
+          [
+            2,
+            2,
+            2,
+            2,
+          ],
+          [
+            2,
+            2,
+            2,
+            2,
+          ],
+        ]
+      `);
+    });
+  });
+  it("shouid remove a new line when decrease", () => {
+    const { map, initMap, setCol, updateMapCol } = useMapEditStore();
+
+    initMap(3, 3);
+
+    setCol(2);
+
+    updateMapCol();
+
+    expect(map).toMatchInlineSnapshot(`
+      [
+        [
+          2,
+          2,
+        ],
+        [
+          2,
+          2,
+        ],
+        [
+          2,
+          2,
+        ],
+      ]
+    `);
+  });
 });

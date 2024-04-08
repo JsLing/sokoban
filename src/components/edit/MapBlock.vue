@@ -25,12 +25,12 @@ function handleMouseDown() {
   startDrag();
   window.addEventListener("mouseup", handleMouseUp);
 }
-function handleMouseLeave() {
+function handleMouseUp() {
   stopDrag();
   window.removeEventListener("mouseup", handleMouseUp);
 }
 
-function handleMouseUp() {
+function handleMouseMove() {
   if (isDragging()) {
     getCurrentEditElement()?.execute(prop);
   }
@@ -41,7 +41,7 @@ function handleMouseUp() {
     class="border border-white"
     @click="handleClick"
     @mousedown="handleMouseDown"
-    @mouseleave="handleMouseLeave"
+    @mousemove="handleMouseMove"
   >
     <template v-if="map[prop.y][prop.x] === MapTile.WALL">
       <img :src="wallImage" draggable="false" />

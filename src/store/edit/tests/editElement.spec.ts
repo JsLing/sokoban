@@ -3,9 +3,11 @@ import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it } from "vitest";
 import {
   floorEditElement,
+  playerEditElement,
   useEditElementStore,
   wallEditElement,
 } from "../editElement";
+import { useEditPlayerStore } from "../editPlayer";
 import { useMapEditStore } from "../mapEdit";
 
 describe("editElement", () => {
@@ -35,5 +37,21 @@ describe("editElement", () => {
 
     getCurrentEditElement().execute({ x: 1, y: 1 });
     expect(map[1][1]).toBe(MapTile.FLOOR);
+  });
+  it("should update position of player when current selected element is  player", () => {
+    const { player } = useEditPlayerStore();
+    const { getCurrentEditElement, setCurrentEditElement } =
+      useEditElementStore();
+
+    setCurrentEditElement(playerEditElement);
+
+    const position = {
+      x: 1,
+      y: 1,
+    };
+
+    getCurrentEditElement().execute(position);
+    expect(player.x).toBe(position.x);
+    expect(player.y).toBe(position.y);
   });
 });

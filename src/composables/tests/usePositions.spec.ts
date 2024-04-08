@@ -32,4 +32,17 @@ describe("usePosition", () => {
       top: "32px",
     });
   });
+  it("should set setp", () => {
+    const pos = {
+      x: 1,
+      y: 1,
+    };
+
+    const { position } = usePosition(pos, 34);
+
+    expect(position.value).toEqual({
+      left: "34px",
+      top: "34px",
+    });
+  });
 });

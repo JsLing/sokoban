@@ -1,18 +1,23 @@
+import cargoImage from "@/assets/cargo.png";
 import floorImage from "@/assets/floor.png";
 import keeperImage from "@/assets/keeper.png";
 import wallImage from "@/assets/wall.png";
 import { Position } from "@/composables/usePosition";
 import { defineStore } from "pinia";
+import { ref } from "vue";
 import { MapTile } from "../map";
+import { useEditCargoStore } from "./editCargo";
 import { useEditPlayerStore } from "./editPlayer";
 import { useMapEditStore } from "./mapEdit";
 
 export interface EditElement {
+  name: string;
   img: string;
   execute: (position: Position) => void;
 }
 
 export const wallEditElement: EditElement = {
+  name: "墙",
   img: wallImage,
   execute(position) {
     const { map } = useMapEditStore();
@@ -21,6 +26,7 @@ export const wallEditElement: EditElement = {
 };
 
 export const floorEditElement: EditElement = {
+  name: "地板",
   img: floorImage,
   execute(position) {
     const { map } = useMapEditStore();
@@ -29,6 +35,7 @@ export const floorEditElement: EditElement = {
 };
 
 export const playerEditElement: EditElement = {
+  name: "玩家",
   img: keeperImage,
   execute(position) {
     const { player } = useEditPlayerStore();
@@ -37,15 +44,24 @@ export const playerEditElement: EditElement = {
   },
 };
 
+export const cargoEditElement: EditElement = {
+  name: "箱子",
+  img: cargoImage,
+  execute(position) {
+    const { createCargo, addCargo } = useEditCargoStore();
+    addCargo(createCargo({ x: position.x, y: position.y }));
+  },
+};
+
 export const useEditElementStore = defineStore("edit-element", () => {
-  let currentEditElement: EditElement;
+  let currentEditElement = ref<EditElement>();
 
   function getCurrentEditElement() {
-    return currentEditElement;
+    return currentEditElement.value;
   }
 
   function setCurrentEditElement(editElement: EditElement) {
-    currentEditElement = editElement;
+    currentEditElement.value = editElement;
   }
 
   return {

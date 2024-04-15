@@ -1,7 +1,9 @@
 import { MapTile } from "@/store/map";
 import { createPinia, setActivePinia } from "pinia";
 import { beforeEach, describe, expect, it } from "vitest";
+import { useEditCargoStore } from "../editCargo";
 import {
+  cargoEditElement,
   floorEditElement,
   playerEditElement,
   useEditElementStore,
@@ -24,7 +26,7 @@ describe("editElement", () => {
 
     setCurrentEditElement(wallEditElement);
 
-    getCurrentEditElement().execute({ x: 1, y: 1 });
+    getCurrentEditElement()!.execute({ x: 1, y: 1 });
     expect(map[1][1]).toBe(MapTile.WALL);
   });
 
@@ -35,9 +37,10 @@ describe("editElement", () => {
 
     setCurrentEditElement(floorEditElement);
 
-    getCurrentEditElement().execute({ x: 1, y: 1 });
+    getCurrentEditElement()!.execute({ x: 1, y: 1 });
     expect(map[1][1]).toBe(MapTile.FLOOR);
   });
+
   it("should update position of player when current selected element is  player", () => {
     const { player } = useEditPlayerStore();
     const { getCurrentEditElement, setCurrentEditElement } =
@@ -50,8 +53,27 @@ describe("editElement", () => {
       y: 1,
     };
 
-    getCurrentEditElement().execute(position);
+    getCurrentEditElement()!.execute(position);
     expect(player.x).toBe(position.x);
     expect(player.y).toBe(position.y);
+  });
+
+  it("should update position of cargo when current selected element is  cargo", () => {
+    const { cargos } = useEditCargoStore();
+
+    const { getCurrentEditElement, setCurrentEditElement } =
+      useEditElementStore();
+
+    setCurrentEditElement(cargoEditElement);
+
+    const position = {
+      x: 1,
+      y: 1,
+    };
+
+    getCurrentEditElement()!.execute(position);
+
+    expect(cargos[0].x).toBe(position.x);
+    expect(cargos[0].y).toBe(position.y);
   });
 });

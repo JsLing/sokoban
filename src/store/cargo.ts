@@ -1,3 +1,4 @@
+import { generateId } from "@/utils/id";
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 import { Position } from "../composables/usePosition";
@@ -11,14 +12,12 @@ export interface Cargo {
   onTarget: boolean;
 }
 
-let _id: number = 1;
-
 export const useCargoStore = defineStore("cargo", () => {
   const cargos: Cargo[] = reactive([]);
 
   function createCargo({ x, y }: { x: number; y: number }): Cargo {
     return {
-      id: _id++,
+      id: generateId(),
       x,
       y,
       onTarget: false,
